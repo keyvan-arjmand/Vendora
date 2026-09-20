@@ -1,111 +1,286 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   VENDORA — DESIGN SYSTEM
+   Primary: #5B4EE8 · Persian-first · RTL-first · Real dark theme
+   ===================================================================== */
+
+/* Dark mode via .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------
+   LAYER 1 — GLOBAL RAW TOKENS
+   Raw palette. Components must NOT reference these directly.
+   ------------------------------------------------------------------- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Neutrals */
+  --gray-0:   #FFFFFF;
+  --gray-25:  #FCFCFD;
+  --gray-50:  #F8F9FC;
+  --gray-100: #F3F4F7;
+  --gray-150: #ECEEF2;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #5F6470;
+  --gray-700: #3F434D;
+  --gray-800: #262A33;
+  --gray-900: #111318;
+  --gray-950: #0B0D10;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Indigo (primary) */
+  --indigo-50:  #EEEBFF;
+  --indigo-100: #DDD8FF;
+  --indigo-200: #C4BBFF;
+  --indigo-400: #7C70FF;
+  --indigo-500: #5B4EE8;
+  --indigo-600: #4F43D1;
+  --indigo-700: #4338B8;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Green (success) */
+  --green-50:  #ECFDF3;
+  --green-100: #D1FADF;
+  --green-200: #BBF7D0;
+  --green-500: #22C55E;
+  --green-600: #16A34A;
+  --green-700: #15803D;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+  /* Amber (warning) */
+  --amber-50:  #FFFAEB;
+  --amber-100: #FEF3C7;
+  --amber-200: #FDE68A;
+  --amber-500: #F59E0B;
+  --amber-600: #D97706;
+  --amber-700: #B45309;
+
+  /* Red (danger) */
+  --red-50:  #FEF2F2;
+  --red-100: #FEE2E2;
+  --red-200: #FECACA;
+  --red-500: #EF4444;
+  --red-600: #DC2626;
+  --red-700: #B91C1C;
+
+  /* Blue (info) */
+  --blue-50:  #EFF6FF;
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+  --blue-500: #3B82F6;
+  --blue-600: #2563EB;
+  --blue-700: #1D4ED8;
+}
+
+/* ---------------------------------------------------------------------
+   LAYER 2 — SEMANTIC TOKENS
+   Registered in @theme so Tailwind generates utilities:
+   bg-bg · bg-surface · text-fg · border-border · bg-primary · etc.
+   ------------------------------------------------------------------- */
+@theme {
+  /* Typography */
+  --font-sans: "Vazirmatn Variable", system-ui, -apple-system,
+  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* Surfaces */
+  --color-bg:         var(--gray-50);
+  --color-surface:    var(--gray-0);
+  --color-surface-2:  var(--gray-100);
+  --color-surface-3:  var(--gray-150);
+
+  /* Foreground */
+  --color-fg:         var(--gray-900);
+  --color-fg-muted:   var(--gray-600);
+  --color-fg-subtle:  #8A909B;
+  --color-fg-faint:   #B5BAC3;
+
+  /* Borders */
+  --color-border:         var(--gray-200);
+  --color-border-strong:  var(--gray-300);
+
+  /* Primary */
+  --color-primary:         var(--indigo-500);
+  --color-primary-hover:   var(--indigo-600);
+  --color-primary-active:  var(--indigo-700);
+  --color-primary-soft:    var(--indigo-50);
+  --color-primary-border:  var(--indigo-100);
+  --color-primary-fg:      #FFFFFF;
+
+  /* Semantic */
+  --color-success:         var(--green-500);
+  --color-success-soft:    var(--green-50);
+  --color-success-border:  var(--green-200);
+
+  --color-warning:         var(--amber-500);
+  --color-warning-soft:    var(--amber-50);
+  --color-warning-border:  var(--amber-200);
+
+  --color-danger:          var(--red-500);
+  --color-danger-soft:     var(--red-50);
+  --color-danger-border:   var(--red-200);
+
+  --color-info:            var(--blue-500);
+  --color-info-soft:       var(--blue-50);
+  --color-info-border:     var(--blue-200);
+
+  /* Radius — deliberate scale */
+  --radius-xs:  6px;
+  --radius-sm:  8px;
+  --radius-md:  10px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 20px;
+
+  /* Shadows — subtle, layered */
+  --shadow-xs: 0 1px 2px 0 rgb(11 13 16 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(11 13 16 / 0.06),
+  0 1px 2px -1px rgb(11 13 16 / 0.04);
+  --shadow-md: 0 4px 12px -2px rgb(11 13 16 / 0.06),
+  0 2px 4px -2px rgb(11 13 16 / 0.04);
+  --shadow-lg: 0 12px 32px -6px rgb(11 13 16 / 0.10),
+  0 4px 12px -4px rgb(11 13 16 / 0.05);
+  --shadow-xl: 0 24px 56px -12px rgb(11 13 16 / 0.16),
+  0 8px 20px -8px rgb(11 13 16 / 0.08);
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------------------------------------------------------------------
+   DARK THEME — real dark, not inverted
+   Only semantic colors change; radius/shadow/motion stay.
+   ------------------------------------------------------------------- */
+.dark {
+  /* Surfaces */
+  --color-bg:         #0B0D10;
+  --color-surface:    #11141A;
+  --color-surface-2:  #181C23;
+  --color-surface-3:  #1F232B;
+
+  /* Foreground */
+  --color-fg:         #F5F7FA;
+  --color-fg-muted:   #A7ADB8;
+  --color-fg-subtle:  #747B87;
+  --color-fg-faint:   #4B515C;
+
+  /* Borders */
+  --color-border:         #272C35;
+  --color-border-strong:  #3A4150;
+
+  /* Primary — lighter in dark for contrast */
+  --color-primary:         #7C70FF;
+  --color-primary-hover:   #8B80FF;
+  --color-primary-active:  #6B5FEE;
+  --color-primary-soft:    #1E1B3A;
+  --color-primary-border:  #2E2A55;
+
+  /* Semantic — adjusted for dark surfaces */
+  --color-success:         #4ADE80;
+  --color-success-soft:    #0F2A1D;
+  --color-success-border:  #14532D;
+
+  --color-warning:         #FBBF24;
+  --color-warning-soft:    #2A1E05;
+  --color-warning-border:  #78350F;
+
+  --color-danger:          #F87171;
+  --color-danger-soft:     #2A1010;
+  --color-danger-border:   #7F1D1D;
+
+  --color-info:            #60A5FA;
+  --color-info-soft:       #0C1E36;
+  --color-info-border:     #1E3A8A;
+
+  /* Shadows dark: deeper */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.30);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.40),
+  0 1px 2px -1px rgb(0 0 0 / 0.30);
+  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.45),
+  0 2px 4px -2px rgb(0 0 0 / 0.30);
+  --shadow-lg: 0 12px 32px -6px rgb(0 0 0 / 0.50),
+  0 4px 12px -4px rgb(0 0 0 / 0.35);
+  --shadow-xl: 0 24px 56px -12px rgb(0 0 0 / 0.60),
+  0 8px 20px -8px rgb(0 0 0 / 0.40);
+}
+
+/* ---------------------------------------------------------------------
+   LAYER 3 — COMPONENT TOKENS
+   Grows as we build components. Keep namespaced.
+   ------------------------------------------------------------------- */
+:root {
+  /* Button */
+  --btn-h-sm: 32px;
+  --btn-h-md: 40px;
+  --btn-h-lg: 44px;
+  --btn-px-sm: 12px;
+  --btn-px-md: 16px;
+  --btn-px-lg: 20px;
+
+  /* Input */
+  --input-h-sm: 36px;
+  --input-h-md: 42px;
+  --input-h-lg: 48px;
+}
+
+/* ---------------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    min-height: 100svh;
+    font-size: 14px;
+    line-height: 1.6;
   }
-}
 
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  /* Accessible focus ring — consistent everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  button:focus:not(:focus-visible),
+  a:focus:not(:focus-visible),
+  input:focus:not(:focus-visible),
+  select:focus:not(:focus-visible),
+  textarea:focus:not(:focus-visible) {
+    outline: none;
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-fg-faint);
+    background-clip: content-box;
+    border: 3px solid transparent;
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  /* Selection */
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-active);
+  }
 }
