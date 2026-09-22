@@ -1,0 +1,49 @@
+:root {
+    /* Brand */
+    --sp-primary:        #4F8CFF;
+    --sp-primary-dark:   #2563EB;
+    --sp-accent:         #66D9FF;
+
+    /* Light Surfaces */
+    --sp-bg:             #F7F9FC;
+    --sp-surface:        #FFFFFF;
+    --sp-surface-2:      #F1F5F9;
+    --sp-surface-3:      #E9EEF5;
+
+    /* Light Text */
+    --sp-text:           #0F172A;
+    --sp-text-2:         #64748B;
+    --sp-text-3:         #94A3B8;
+
+    /* Border */
+    --sp-border:         #E2E8F0;
+    --sp-border-2:       #CBD5E1;
+
+    /* Semantic */
+    --sp-success:        #10B981;
+    --sp-warning:        #F59E0B;
+    --sp-danger:         #EF4444;
+
+    /* Gradients */
+    --sp-gradient:        linear-gradient(135deg, #4F8CFF 0%, #66D9FF 100%);
+    --sp-gradient-premium:linear-gradient(135deg, #2563EB 0%, #4F8CFF 55%, #66D9FF 100%);
+
+    /* Shadows */
+    --sp-shadow-soft:    0 1px 3px rgba(15,23,42,.04), 0 1px 2px rgba(15,23,42,.03);
+    --sp-shadow-card:    0 4px 14px -4px rgba(15,23,42,.06);
+    --sp-shadow-lift:    0 12px 32px -10px rgba(15,23,42,.12);
+}
+
+.dark {
+    --sp-bg:             #0B1220;
+    --sp-surface:        #111A2E;
+    --sp-surface-2:      #16213B;
+    --sp-surface-3:      #1D2A47;
+
+    --sp-text:           #F8FAFC;
+    --sp-text-2:         #94A3B8;
+    --sp-text-3:         #64748B;
+
+    --sp-border:         #1E2B45;
+    --sp-border-2:       #2A3A5C;
+}
